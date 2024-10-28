@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إظهار الرسالة</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .mohammed{
+            font-size: 15px;
+            margin-right: 0;
+            position: relative;
+            top: -70px;
+            background-clip: text;
+            background: linear-gradient(to right, #4285f4, #d96570);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            color: #61dafb;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            font-size: 2em;
+            text-align: center;
+        }
+        input {
+            margin: 10px;
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #61dafb;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #3c4043;
+            color: #ffffff;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #21a1f1;
+            outline: none;
+        }
+        button {
+            margin: 10px;
+            padding: 15px;
+            width: 100%;
+            max-width: 400px;
+            background-color: #61dafb;
+            color: #282c34;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #21a1f1;
+            transform: translateY(-2px);
+        }
+        a {
+            color: #61dafb;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #hiddenMessageDisplay {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #21a1f1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* استعلامات الوسائط لتحسين التصميم */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            input, button {
+                padding: 10px;
+                font-size: 14px;
+            }
+            .mohammed{
+                font-size: 15px;
+                text-align: center;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mohammed">
+        <h2>محمد عبدالباسط</h2>
+    </div>
+
+
+    <h1>إظهار الرسالة المخفية</h1>
+    <input type="text" id="inputMessage" placeholder="الصق الرسالة المعروضة هنا">
+    <button onclick="revealMessage()">إظهار الرسالة المخفية</button>
+    <button onclick="copyHiddenMessage()">نسخ الرسالة المخفية</button>
+    <button onclick="resetInput()">إعادة تعيين</button>
+    <a href="index.html">العودة إلى إخفاء الرسالة</a>
+    <p id="hiddenMessageDisplay"></p>
+
+    <script>
+        function revealMessage() {
+            const inputMessage = document.getElementById('inputMessage').value;
+            const hiddenMessage = localStorage.getItem('hiddenMessage');
+
+            if (inputMessage) {
+                document.getElementById('hiddenMessageDisplay').textContent = `الرسالة المخفية: ${hiddenMessage}`;
+            } else {
+                document.getElementById('hiddenMessageDisplay').textContent = 'يرجى لصق الرسالة المعروضة.';
+            }
+        }
+
+        function copyHiddenMessage() {
+            const hiddenMessage = localStorage.getItem('hiddenMessage');
+            navigator.clipboard.writeText(hiddenMessage).then(() => {
+                alert('تم نسخ الرسالة المخفية!');
+            });
+        }
+
+        function resetInput() {
+            document.getElementById('inputMessage').value = '';
+            document.getElementById('hiddenMessageDisplay').textContent = '';
+        }
+    </script>
+</body>
+</html>
